@@ -9,10 +9,10 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
-public class RestUtil {
+public class RestUtils {
    public CloseableHttpResponse serverResponse;
 
-    public RestUtil(CloseableHttpResponse serverResponse) {
+    public RestUtils(CloseableHttpResponse serverResponse) {
         this.serverResponse = serverResponse;
     }
 
@@ -32,6 +32,11 @@ public class RestUtil {
 
     }
 
+    /**This method maps serverResponse to String
+     * @param serverResponse
+     * @return String Object
+     * @throws IOException
+     */
 public static String getString(CloseableHttpResponse serverResponse)throws IOException {
     HttpEntity entity = serverResponse.getEntity();
     String responseString = EntityUtils.toString(entity, "UTF-8");
