@@ -10,24 +10,32 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 public class RestUtil {
+   public CloseableHttpResponse serverResponse;
 
-      /**
+    public RestUtil(CloseableHttpResponse serverResponse) {
+        this.serverResponse = serverResponse;
+    }
+
+    /**
      * This method creates request and returns response from a server in String format
      * @param baseURL URL that is need to be verified
      * @return response from a server
      * @throws IOException
      */
+
+
     public static CloseableHttpResponse getResponse(String baseURL) throws IOException {
         HttpGet httpGet = new HttpGet(baseURL);
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        CloseableHttpResponse response = httpclient.execute(httpGet);
-        return response;
+        CloseableHttpResponse serverResponse = httpclient.execute(httpGet);
+        return serverResponse;
 
     }
 
-public static String getString(CloseableHttpResponse response)throws IOException {
-    HttpEntity entity = response.getEntity();
+public static String getString(CloseableHttpResponse serverResponse)throws IOException {
+    HttpEntity entity = serverResponse.getEntity();
     String responseString = EntityUtils.toString(entity, "UTF-8");
     return responseString;
 }
-}
+
+   }
