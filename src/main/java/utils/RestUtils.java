@@ -26,6 +26,7 @@ public class RestUtils {
         HttpGet httpGet = new HttpGet(baseURL);
         CloseableHttpClient httpclient = HttpClients.createDefault();
         CloseableHttpResponse serverResponse = httpclient.execute(httpGet);
+
         System.out.println("----------------------------------------");
         System.out.println("Executing request " + httpGet.getURI());
         System.out.println("Response status code is " + serverResponse.getStatusLine().getStatusCode());
@@ -35,7 +36,6 @@ public class RestUtils {
 
     /**
      * This method maps serverResponse to String
-     *
      * @param serverResponse
      * @return response from a server in a String format
      * @throws IOException
