@@ -12,12 +12,9 @@ import java.io.IOException;
 public class RestUtils {
     public CloseableHttpResponse serverResponse;
 
-    public RestUtils(CloseableHttpResponse serverResponse) {
-        this.serverResponse = serverResponse;
-    }
 
     /**
-     * This method creates request and returns response from a server in String format
+     * This method creates request and returns response from a server
      *
      * @param baseURL URL that is need to be verified
      * @return response from a server
@@ -26,12 +23,12 @@ public class RestUtils {
 
 
     public static CloseableHttpResponse getResponse(String baseURL) throws IOException {
-        HttpGet httpGet = new HttpGet( baseURL );
+        HttpGet httpGet = new HttpGet(baseURL);
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        CloseableHttpResponse serverResponse = httpclient.execute( httpGet );
-        System.out.println( "----------------------------------------" );
-        System.out.println( "Executing request " + httpGet.getURI() );
-        System.out.println( "Response status code is " + serverResponse.getStatusLine().getStatusCode() );
+        CloseableHttpResponse serverResponse = httpclient.execute(httpGet);
+        System.out.println("----------------------------------------");
+        System.out.println("Executing request " + httpGet.getURI());
+        System.out.println("Response status code is " + serverResponse.getStatusLine().getStatusCode());
         return serverResponse;
 
     }
@@ -40,15 +37,16 @@ public class RestUtils {
      * This method maps serverResponse to String
      *
      * @param serverResponse
-     * @return String Object
+     * @return response from a server in a String format
      * @throws IOException
      */
     public static String getResponseAsString(CloseableHttpResponse serverResponse) throws IOException {
         HttpEntity entity = serverResponse.getEntity();
-        String responseString = EntityUtils.toString( entity, "UTF-8" );
-        System.out.println( "----------------------------------------" );
-        System.out.println( responseString );
+        String responseString = EntityUtils.toString(entity, "UTF-8");
+        System.out.println("----------------------------------------");
+        System.out.println(responseString);
         return responseString;
+
     }
 
 }

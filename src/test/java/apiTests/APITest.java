@@ -2,6 +2,7 @@ package apiTests;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import utils.RestUtils;
 
@@ -15,35 +16,40 @@ public class APITest {
 
     @Test(description = "Verify response is not null ")
     public void notEmptyHTTPResponseTest() throws IOException {
-        CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedPositiveResponse );
-        Assert.assertNotNull( serverResponse );
+        CloseableHttpResponse serverResponse = RestUtils.getResponse(URLExpectedPositiveResponse);
+        Assert.assertNotNull(serverResponse);
+        serverResponse.close();
     }
 
     @Test(description = "Verify response is 200 for countryCode = USA and valid stateCode=ID", priority = 1)
     public void positiveHTTPResponseStatusTest() throws IOException {
-        CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedPositiveResponse );
-        Assert.assertEquals( serverResponse.getStatusLine().getStatusCode(), 200 );
+        CloseableHttpResponse serverResponse = RestUtils.getResponse(URLExpectedPositiveResponse);
+        Assert.assertEquals(serverResponse.getStatusLine().getStatusCode(), 200);
+        serverResponse.close();
     }
 
     @Test(description = "Verify capital is Boise for countryCode = USA and valid stateCode=ID", priority = 200)
     public void positiveCapitalTest() throws IOException {
-        CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedPositiveResponse );
-        String responseString = RestUtils.getResponseAsString( serverResponse );
-        boolean checkCapital = responseString.contains( "Boise" );
-        Assert.assertTrue( checkCapital );
+        CloseableHttpResponse serverResponse = RestUtils.getResponse(URLExpectedPositiveResponse);
+        String responseString = RestUtils.getResponseAsString(serverResponse);
+        boolean checkCapital = responseString.contains("Boise");
+        Assert.assertTrue(checkCapital);
+        serverResponse.close();
     }
 
     @Test(description = "Verify response is 200 for countryCode = USA and invalid stateCode = Belarus")
     public void negativeHTTPResponseStatusTest() throws IOException {
-        CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedNegativeResponse );
-        Assert.assertEquals( serverResponse.getStatusLine().getStatusCode(), 200 );
-    }
+        CloseableHttpResponse serverResponse = RestUtils.getResponse(URLExpectedNegativeResponse);
+        Assert.assertEquals(serverResponse.getStatusLine().getStatusCode(), 200);
+        serverResponse.close();
+            }
 
     @Test(description = "Verify body contains correct validation error", priority = 200)
     public void correctValidationErrorTest() throws IOException {
-        CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedNegativeResponse );
-        String responseString = RestUtils.getResponseAsString( serverResponse );
-        Boolean errorMsg = responseString.contains( "No matching state found for requested code" );
-        Assert.assertTrue( errorMsg );
+        CloseableHttpResponse serverResponse = RestUtils.getResponse(URLExpectedNegativeResponse);
+        String responseString = RestUtils.getResponseAsString(serverResponse);
+        Boolean errorMsg = responseString.contains("No matching state found for requested code");
+        Assert.assertTrue(errorMsg);
+        serverResponse.close();
     }
 }
