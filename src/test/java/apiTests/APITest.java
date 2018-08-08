@@ -25,14 +25,14 @@ public class APITest {
         Assert.assertNotNull( serverResponse );
     }
 
-    @Test(description = "Verify response is 200 for countryCode = USA and valid stateCode=ID", priority = 1)
+    @Test(description = "Verify response is 200 for countryCode = USA and valid stateCode=ID")
     public void positiveHTTPResponseStatusTest() throws IOException {
         logger.info("Verify response is 200 for countryCode = USA and valid stateCode=ID" );
         CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedPositiveResponse );
         Assert.assertEquals( serverResponse.getStatusLine().getStatusCode(), 200 );
     }
 
-    @Test(description = "Verify capital is Boise for countryCode = USA and valid stateCode=ID", priority = 200)
+    @Test(description = "Verify capital is Boise for countryCode = USA and valid stateCode=ID")
     public void positiveCapitalTest() throws IOException {
         logger.info( "Verify capital is Boise for countryCode = USA and valid stateCode=ID" );
         CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedPositiveResponse );
@@ -48,7 +48,7 @@ public class APITest {
         Assert.assertEquals( serverResponse.getStatusLine().getStatusCode(), 200 );
     }
 
-    @Test(description = "Verify body contains correct validation error", priority = 200)
+    @Test(description = "Verify body contains correct validation error")
     public void correctValidationErrorTest() throws IOException {
        logger.info( "Verify body contains correct validation error" );
         CloseableHttpResponse serverResponse = RestUtils.getResponse( URLExpectedNegativeResponse );
